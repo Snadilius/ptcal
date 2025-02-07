@@ -160,12 +160,12 @@
         <div class="input-section">
             <div class="inputs">
                 <div class="input-group">
-                    <label for="m">m:</label>
-                    <input type="number" id="m" step="any">
+                    <label for="y">y:</label>
+                    <input type="number" id="y" step="any">
                 </div>
                 <div class="input-group">
-                    <label for="q">q:</label>
-                    <input type="number" id="q" step="any">
+                    <label for="x">x:</label>
+                    <input type="number" id="x" step="any">
                 </div>
                 <div class="input-group">
                     <label for="normalidad">Normalidad (seg):</label>
@@ -183,16 +183,16 @@
 
     <script>
         function calculate() {
-            const values = ['m', 'q', 'normalidad', 'calibracion'].map(id => parseFloat(document.getElementById(id).value));
+            const values = ['y', 'x', 'normalidad', 'calibracion'].map(id => parseFloat(document.getElementById(id).value));
             
             if (values.some(isNaN)) {
                 document.getElementById('result').textContent = "Error";
                 return;
             }
 
-            const [m, q, normalidad, calibracion] = values;
+            const [y, x, normalidad, calibracion] = values;
             const factor = calibracion / normalidad;
-            const result = 1 / (m * factor + q);
+            const result = 1 / (y* factor + x);
             
             document.getElementById('result').textContent = result.toFixed(1);
         }
