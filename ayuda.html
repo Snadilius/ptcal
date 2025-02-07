@@ -65,18 +65,8 @@
             margin-top: 10px;
         }
 
-        .navigation-buttons button {
+        .navigation-buttons button, .back-button button {
             padding: 10px 20px;
-            margin: 5px;
-            font-size: 1rem;
-            background-color: #0046ad;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .back-button {
-           padding: 10px 20px;
             margin: 5px;
             font-size: 1rem;
             background-color: #0046ad;
@@ -106,11 +96,8 @@
             <div class="navigation-buttons">
                 <button id="prevBtn" onclick="previousMedia()" style="display: none;">Anterior</button>
                 <button id="nextBtn" onclick="nextMedia()">Siguiente</button>
+                <button onclick="location.href='index.html'">Volver</button>
             </div>
-        </div>
-
-        <div class="back-button">
-            <button onclick="location.href='index.html'">Volver</button>
         </div>
     </div>
 
