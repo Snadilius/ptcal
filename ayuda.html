@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalPT 2.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .top-bar {
+            background-color: #0046ad;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .logo {
+            color: #0046ad;
+            font-weight: bold;
+            font-size: 2.5rem;
+            margin-left: 20px;
+            text-align: left;
+            position: absolute;
+            left: 20px;
+        }
+
+        .legend {
+            font-size: 1rem;
+            color: #333;
+            text-align: justify;
+            margin-top: 60px;
+            max-width: 600px;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .media-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        video {
+            max-width: 90%;
+            width: 550px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .navigation-buttons {
+            margin-top: 10px;
+        }
+
+        .navigation-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 1rem;
+            background-color: #0046ad;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .navigation-buttons button:hover {
+            background-color: #003080;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">CalPT 2.0</div>
+    <div class="container">
+        <div class="logo">werfen</div>
+        <p class="legend">
+            Instrucciones.<br>
+            Antes de realizar la calibración, acceda a "Configuración" → "Líquidos" y en la columna de la izquierda seleccione "Plasma Cal" o "Hemosil Plasma Cal".<br>  
+            A continuación, en la columna de la derecha marque "PTRP-8" o "PTRP-20", según corresponda, y haga clic en "Asignar nuevos valores".<br>  
+            Asigne el valor 100 y continue con la calibración.  
+            <br><br>
+            Después de aceptar la calibración, acceda a la revisión de datos:<br>  
+            "Calibración" → "Revisión Calibraciones", donde podrá ver los test calibrados.  
+            Después seleccione "PTRP-8" o "PTRP-20" y haga clic en "Detalles" (icono de papel con lupa).  
+            <br><br>
+            Datos a registrar:<br>  
+            - En el cuadro "Ecuación" anote los valores "x" e "y".<br>  
+                  > Nota: El valor "y" es negativo, por lo que debe ingresarlo con el signo correspondiente.<br>  
+            - En "PUNTOS DE CALIBRACIÓN" anote el valor del "100% de calibración", que corresponde a la columna "Valor Medio" y Nivel 100,00.  
+            <br><br>
+            Por último, Seleccione "Configuración" - "Tests" - "Ver/Definir". en a columna de tests, marque "PTRP-8" o "PTRP20" según corresponda y a continuación click en el icono "detalles" (papel con lupa). 
+            Una vez en los detalles del test marcamos el botón "Configuración Cálculo" y anotamos el valor correspondiente al "Valor de Refrencia".
+            <br><br>
+            Ya tendremos todos los datos necesarios para realiar el cálculo.<br>
+              - Ejemplo:<br>  
+                - x = 0,018<br>  
+                - y = -0,007<br>  
+                - 100% = 11,9 seg.<br>
+                - Normalidad: 11,5 seg.
+            <br><br>
+            Si tiene dudas, puede contactar con Help Line: 900 813 366.
+        </p>
+
+        <div class="media-container">
+            <h3 id="videoTitle">Pasos previos a la Calibración</h3>
+            <video id="media" controls>
+                <source src="instrucciones.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+            <div class="navigation-buttons">
+                <button id="prevBtn" onclick="previousMedia()" style="display: none;">Anterior</button>
+                <button id="nextBtn" onclick="nextMedia()">Siguiente</button>
+                <button onclick="location.href='index.html'">Volver</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const mediaFiles = [
+            { file: "instrucciones.mp4", title: "Pasos previos a la Calibración" },
+            { file: "video2.mp4", title: "Ver valores de Calibración" },
+            { file: "video3.mp4", title: "Valor de Normalidad" }
+        ];
+
+        let currentIndex = 0;
+        const mediaElement = document.getElementById("media");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const videoTitle = document.getElementById("videoTitle");
+
+        function updateMedia() {
+            mediaElement.src = mediaFiles[currentIndex].file;
+            mediaElement.load();
+            mediaElement.play();
+            videoTitle.textContent = mediaFiles[currentIndex].title;
+            prevBtn.style.display = currentIndex === 0 ? "none" : "inline-block";
+            nextBtn.style.display = currentIndex === mediaFiles.length - 1 ? "none" : "inline-block";
+        }
+
+        function previousMedia() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateMedia();
+            }
+        }
+
+        function nextMedia() {
+            if (currentIndex < mediaFiles.length - 1) {
+                currentIndex++;
+                updateMedia();
+            }
+        }
+
+        updateMedia();
+    </script>
+</body>
+</html>
