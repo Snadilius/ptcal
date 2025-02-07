@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
             background-color: white;
-            text-align: center;
         }
 
         .top-bar {
@@ -23,30 +22,6 @@
             font-size: 1.5rem;
         }
 
-        .logo {
-            color: #0046ad;
-            font-weight: bold;
-            font-size: 2.5rem;
-            margin: 20px 0;
-        }
-
-        .legend {
-            font-size: 1rem;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto 20px;
-        }
-
-        .legend a {
-            color: #0046ad;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .legend a:hover {
-            text-decoration: underline;
-        }
-
         .container {
             padding: 20px;
             display: flex;
@@ -54,82 +29,69 @@
             align-items: center;
         }
 
+        .logo {
+            color: #0046ad;
+            font-weight: bold;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
         .input-section {
-            width: 100%;
-            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         .inputs, .result-box {
-            width: 100%;
-            padding: 20px;
-            background-color: #f9f9f9;
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px;
             border: 1px solid black;
-            display: flex;
-            flex-direction: column;
+            padding: 15px;
+            background-color: #f9f9f9;
+            width: 300px;
             align-items: center;
             justify-content: center;
         }
 
-        .inputs label {
-            width: 100%;
-            text-align: left;
-            font-size: 1rem;
-            margin-top: 10px;
-        }
-
         .inputs input {
-            width: 100%;
-            padding: 8px;
+            width: 100px;
+            height: 30px;
             font-size: 1rem;
             text-align: center;
         }
 
         .result-box {
-            font-size: 4rem;
-            font-weight: bold;
             background-color: #cceeff;
-            height: 150px;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            width: 300px;
+            height: 100px;
+            margin-top: 10px;
         }
 
         .calculate-button {
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 1.5rem;
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 1rem;
             background-color: #0046ad;
             color: white;
             border: none;
             cursor: pointer;
-            width: 100%;
-            max-width: 400px;
         }
 
-        @media (max-width: 600px) {
-            .top-bar {
-                font-size: 1.3rem;
-                height: 50px;
+        @media (max-width: 400px) {
+            .inputs, .result-box {
+                width: 250px;
             }
-
-            .logo {
-                font-size: 2rem;
+            .inputs input {
+                width: 80px;
             }
-
-            .legend {
-                font-size: 0.9rem;
-                max-width: 90%;
-            }
-
             .result-box {
-                font-size: 3rem;
-                height: 120px;
-            }
-
-            .calculate-button {
-                font-size: 1.2rem;
-                padding: 12px;
+                font-size: 2.5rem;
+                height: 80px;
             }
         }
     </style>
@@ -138,42 +100,36 @@
     <div class="top-bar">CalPT 2.0</div>
     <div class="container">
         <div class="logo">werfen</div>
-        <p class="legend">
-            Si tiene los datos necesarios para realizar los cálculos, introduzca en los campos correspondientes y obtendrá el resultado que ha de poner en el ACL Elite PRO.<br>  
-            Si necesita ayuda <a href="ayuda.html">pulse aquí</a>.
-        </p>
+        
         <div class="input-section">
             <div class="inputs">
-                <label for="m">m:</label>
-                <input type="number" id="m" step="any">
-
-                <label for="q">q:</label>
-                <input type="number" id="q" step="any">
-
+                <label for="x">x:</label>
+                <input type="number" id="x" step="any">
+                <label for="y">y:</label>
+                <input type="number" id="y" step="any">
                 <label for="normalidad">Normalidad (seg):</label>
                 <input type="number" id="normalidad" step="any">
-
                 <label for="calibracion">100% Calibración (seg):</label>
                 <input type="number" id="calibracion" step="any">
             </div>
-            <div class="result-box" id="result">0.0</div>
         </div>
         <button class="calculate-button" onclick="calculate()">Calcular</button>
+        <div class="result-box" id="result">0.0</div>
     </div>
 
     <script>
         function calculate() {
-            const m = parseFloat(document.getElementById('m').value);
-            const q = parseFloat(document.getElementById('q').value);
+            const x = parseFloat(document.getElementById('x').value);
+            const y = parseFloat(document.getElementById('y').value);
             const normalidad = parseFloat(document.getElementById('normalidad').value);
             const calibracion = parseFloat(document.getElementById('calibracion').value);
 
-            if (isNaN(m) || isNaN(q) || isNaN(normalidad) || isNaN(calibracion)) {
-                alert('Por favor, introduce todos los datos correctamente.');
+            if (isNaN(x) || isNaN(y) || isNaN(normalidad) || isNaN(calibracion) || normalidad === 0) {
+                alert('Por favor, introduce todos los datos correctamente. Normalidad no puede ser cero.');
                 return;
             }
 
-            const result = 1 / (m * (calibracion / normalidad) + q);
+            const result = 1 / ((x * (calibracion / normalidad)) + y);
             document.getElementById('result').textContent = result.toFixed(1);
         }
     </script>
