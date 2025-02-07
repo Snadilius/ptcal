@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalPT 2.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            text-align: center;
+        }
+
+        .top-bar {
+            background-color: #0046ad;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logo {
+            color: #0046ad;
+            font-weight: bold;
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+
+        .legend {
+            font-size: 1rem;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .legend a {
+            color: #0046ad;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .legend a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-section {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .inputs, .result-box {
+            width: 100%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .inputs label {
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .inputs input {
+            width: 100%;
+            padding: 8px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .result-box {
+            font-size: 4rem;
+            font-weight: bold;
+            background-color: #cceeff;
+            height: 150px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calculate-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            background-color: #0046ad;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        @media (max-width: 600px) {
+            .top-bar {
+                font-size: 1.3rem;
+                height: 50px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .legend {
+                font-size: 0.9rem;
+                max-width: 90%;
+            }
+
+            .result-box {
+                font-size: 3rem;
+                height: 120px;
+            }
+
+            .calculate-button {
+                font-size: 1.2rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">CalPT 2.0</div>
+    <div class="container">
+        <div class="logo">werfen</div>
+        <p class="legend">
+            Si tiene los datos necesarios para realizar los cálculos, introduzca en los campos correspondientes y obtendrá el resultado que ha de poner en el ACL Elite PRO.<br>  
+            Si necesita ayuda <a href="ayuda.html">pulse aquí</a>.
+        </p>
+        <div class="input-section">
+            <div class="inputs">
+                <label for="m">m:</label>
+                <input type="number" id="m" step="any">
+
+                <label for="q">q:</label>
+                <input type="number" id="q" step="any">
+
+                <label for="normalidad">Normalidad (seg):</label>
+                <input type="number" id="normalidad" step="any">
+
+                <label for="calibracion">100% Calibración (seg):</label>
+                <input type="number" id="calibracion" step="any">
+            </div>
+            <div class="result-box" id="result">0.0</div>
+        </div>
+        <button class="calculate-button" onclick="calculate()">Calcular</button>
+    </div>
+
+    <script>
+        function calculate() {
+            const m = parseFloat(document.getElementById('m').value);
+            const q = parseFloat(document.getElementById('q').value);
+            const normalidad = parseFloat(document.getElementById('normalidad').value);
+            const calibracion = parseFloat(document.getElementById('calibracion').value);
+
+            if (isNaN(m) || isNaN(q) || isNaN(normalidad) || isNaN(calibracion)) {
+                alert('Por favor, introduce todos los datos correctamente.');
+                return;
+            }
+
+            const result = 1 / (m * (calibracion / normalidad) + q);
+            document.getElementById('result').textContent = result.toFixed(1);
+        }
+    </script>
+</body>
+</html>
