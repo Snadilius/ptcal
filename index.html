@@ -38,7 +38,7 @@
             color: #333;
             text-align: justify;
             margin-top: 60px;
-            max-width: 400px;
+            max-width: 600px;
         }
 
         .legend a {
@@ -65,7 +65,8 @@
             gap: 20px;
             margin-top: 20px;
             width: 90%;
-                  }
+        }
+
         .inputs {
             display: flex;
             flex-direction: column;
@@ -74,24 +75,31 @@
             padding: 20px;
             background-color: #f9f9f9;
             width: 90%;
-            max-width: 300px;
+            max-width: 400px;
             border-radius: 10px;
         }
 
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .inputs label {
-            text-align: center;
             font-weight: bold;
+            width: 50%;
+            text-align: left;
         }
 
         .inputs input {
-            width: 90%;
-            padding: 2px;
+            width: 50%;
+            padding: 5px;
             font-size: 1rem;
         }
 
         .result-box {
             width: 90%;
-            max-width: 350px;
+            max-width: 450px;
             height: 200px;
             display: flex;
             align-items: center;
@@ -151,17 +159,22 @@
         </p>
         <div class="input-section">
             <div class="inputs">
-                <label for="m">m:</label>
-                <input type="number" id="m" step="any">
-
-                <label for="q">q:</label>
-                <input type="number" id="q" step="any">
-
-                <label for="normalidad">Normalidad (seg):</label>
-                <input type="number" id="normalidad" step="any">
-
-                <label for="calibracion">100% Calibración (seg):</label>
-                <input type="number" id="calibracion" step="any">
+                <div class="input-group">
+                    <label for="m">m:</label>
+                    <input type="number" id="m" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="q">q:</label>
+                    <input type="number" id="q" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="normalidad">Normalidad (seg):</label>
+                    <input type="number" id="normalidad" step="any">
+                </div>
+                <div class="input-group">
+                    <label for="calibracion">100% Calibración (seg):</label>
+                    <input type="number" id="calibracion" step="any">
+                </div>
             </div>
             <div class="result-box" id="result">0.0</div>
         </div>
